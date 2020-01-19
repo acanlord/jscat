@@ -2,7 +2,14 @@
 
 # Description
 
-A simple html with javascript using api.thecatapi.com
+- A simple html with javascript using api.thecatapi.com
+- If the search term is empty, a random picture will be displayed
+- The search term requires a breed id. 
+
+# Example
+
+1. For a random result, just click "search" button, and then click "Display Result"
+2. For a specific breed, use an id listed below and click "search", then, click "Display Result"
 
 # Note
 
