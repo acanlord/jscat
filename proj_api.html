@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bare-css@2.0.3/css/bare.min.css" />
+    </head>
+    <body>
+        <nav>
+            <section>
+                <h1>Cat API</h1>
+            </section>
+        </nav>
+        <section>
+            <section id="output">
+            </section>
+            <input placeholder="Search for a Gif" id="search" />
+            <button onClick="doFetch()">Search</button>
+            <button onClick="displayOutput()">Display results</button>
+        </section>
+
+<script>
+  console.log('api_gif_search is starting...')
+  let state = {
+      // Just some placeholder data until we add real data...
+      data: [
+          {
+              title: 'Nothing yet...',
+              description: 'Nada....',
+          },
+      ],
+  };
+
+  
+    function doFetch() {
+        // searchTerm is based on "breed_ids" 
+        // ref: https://api.thecatapi.com/v1/breeds
+        let searchTermElement = document.querySelector('#search');
+        const searchTerm = searchTermElement.value;
+
+        if ( searchTerm === '') {
+            url = 'https://api.thecatapi.com/v1/images/search';
+        } else {
+            url = `https://api.thecatapi.com/v1/images/search?breed_ids=${searchTerm}`;
+        }
+            fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                state.data = data;
+            });
+    }
+
+    function displayOutput() {
+        let output = document.querySelector('#output');
+        output.innerHTML = '';
+
+        for (let gifInfo of state.data) {
+            let image = document.createElement('img');
+
+            image.src = gifInfo.url
+            output.appendChild(image);
+        }
+    }
+</script>
+</body>
+</html>
